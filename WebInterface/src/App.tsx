@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
+import BoardIndex from './components/BoardIndex/BoardIndex';
 import Heading from './elements/Heading';
 import Footer from './layout/Footer';
 import Header from './layout/Header';
@@ -14,6 +15,9 @@ class App extends Component {
                 <div className="app-wrapper">
                     <div className="app">
                         <Heading text="Board index" />
+                        <main>
+                            <BoardIndex />
+                        </main>
                     </div>
                     <Footer />
                 </div>

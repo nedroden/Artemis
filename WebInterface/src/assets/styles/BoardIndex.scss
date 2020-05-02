@@ -1,0 +1,52 @@
+.category {
+    margin: 5px;
+
+    .category-info {
+        margin-top: 15px;
+        padding: 15px;
+        background: #efefef;
+
+        h2,
+        p {
+            font-family: Roboto;
+            margin: 0;
+            color: #444;
+        }
+
+        h2 {
+            font-size: 130%;
+        }
+
+        p {
+            font-size: 80%;
+        }
+    }
+
+    .category-board-container {
+        .board {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+
+            h3,
+            p {
+                margin: 0;
+                font-family: Roboto;
+            }
+
+            h3 {
+                font-size: 110%;
+
+                a {
+                    color: steelblue;
+                    text-decoration: none;
+                    font-weight: normal;
+                }
+            }
+
+            p {
+                font-size: 90%;
+                color: #666;
+            }
+        }
+    }
+}
