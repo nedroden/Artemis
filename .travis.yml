@@ -1,0 +1,15 @@
+jobs:
+  include:
+    - stage: "Api tests and linters"
+      language: csharp
+      solution: Api/Api.sln
+      mono: none
+      dotnet: 3.1.100
+      script:
+        - cd Api && make dependencies && make test
+
+    - stage: "Frontend tests and linters"
+      language: node_js
+      node_js: 13
+      script:
+        - cd WebInterface && make dependencies && make lint

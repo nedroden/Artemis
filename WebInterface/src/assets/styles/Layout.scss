@@ -1,0 +1,49 @@
+#header {
+    padding: 30px;
+    background-color: #f3f3f3;
+    background: linear-gradient(125deg, #f3f3f3, #ccc);
+    font-size: 200%;
+    font-family: Roboto;
+    color: #444;
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+}
+
+#menu {
+    ul {
+        list-style-type: none;
+        padding: 0 0 0 20px;
+        margin: 0;
+        background: steelblue;
+        overflow: hidden;
+
+        li {
+            float: left;
+            font-size: 105%;
+            font-family: 'Roboto';
+
+            a {
+                color: #fafafa;
+                text-decoration: none;
+                display: block;
+                padding: 10px 5px 10px 5px;
+                margin: 0 7px 0 7px;
+            }
+        }
+    }
+}
+
+#footer {
+    padding: 10px;
+    font-size: 90%;
+    font-family: Roboto;
+    color: #333;
+
+    a {
+        color: steelblue;
+        text-decoration: inherit;
+    }
+}
