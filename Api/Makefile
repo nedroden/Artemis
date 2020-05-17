@@ -1,14 +1,14 @@
 build:
-	dotnet build
+	echo "Building"
 
 dependencies:
-	dotnet restore
+	composer install
 
 migrate:
-	cd Artemis && dotnet ef database update
+	php artisan migrate:fresh --seed
 
 start:
-	dotnet run --project=Artemis
+	php artisan serve
 
 test:
-	dotnet test
+	echo "Testing"

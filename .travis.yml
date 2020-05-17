@@ -1,10 +1,9 @@
 jobs:
   include:
     - stage: "Api tests and linters"
-      language: csharp
-      solution: Api/Api.sln
-      mono: none
-      dotnet: 3.1.100
+      language: php
+      php:
+        - '7.4'
       script:
         - cd Api && make dependencies && make test
 
