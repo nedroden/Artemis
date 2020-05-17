@@ -26,7 +26,7 @@
             font-family: 'Roboto';
 
             a {
-                color: #fafafa;
+                color: #f6f7f8;
                 text-decoration: none;
                 display: block;
                 padding: 10px 5px 10px 5px;
@@ -46,4 +46,10 @@
         color: steelblue;
         text-decoration: inherit;
     }
+}
+
+.description {
+    font-family: 'Roboto';
+    font-size: 95%;
+    color: #333;
 }

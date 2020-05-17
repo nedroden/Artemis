@@ -1,0 +1,26 @@
+.inputContainer {
+    padding: 10px;
+
+    label {
+        font-weight: bold;
+        display: block;
+        font-family: 'Roboto';
+        margin-bottom: 2px;
+    }
+
+    .textInput {
+        padding: 10px;
+        font-size: 150%;
+        color: #666;
+        margin: 0;
+        width: auto;
+    }
+}
+
+.button-submit {
+    border: 0;
+    padding: 10px;
+    margin: 10px;
+    background: steelblue;
+    color: #f6f7f8;
+}

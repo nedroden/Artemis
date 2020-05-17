@@ -8,7 +8,8 @@ interface MenuItem {
 class Menu extends Component {
     private _menuItems: MenuItem[] = [
         { label: 'Home', href: '/' },
-        { label: 'Search', href: '/login' }
+        { label: 'Login', href: '/login' },
+        { label: 'Register', href: '/register' }
     ];
 
     private renderMenuItems(): ReactNode[] {

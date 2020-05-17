@@ -36,7 +36,9 @@ class Category extends Component<Props, State> {
 
         const boards: Board[] = await this._boardService.getAllByCategory(this.props.details.id);
 
-        this.setState({ boards });
+        this.setState({
+            boards: boards.sort((a: Board, b: Board) => (a?.position || 0) - (b?.position || 0))
+        });
     }
 
     public render(): ReactNode {

@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
+import Heading from '../../elements/Heading';
 import conditionalSpinnerRenderer from '../../helpers/ConditionalSpinnerRenderer';
 import Category from '../../models/Category';
 import CategoryService from '../../services/CategoryService';
@@ -27,12 +28,15 @@ class BoardIndex extends Component<{}, State> {
     private async loadCategories(): Promise<void> {
         const categories: Category[] = await this._categoryService.getAll();
 
-        this.setState({ categories });
+        this.setState({
+            categories: categories.sort((a: Category, b: Category) => (a?.position || 0) - (b?.position || 0))
+        });
     }
 
     public render(): ReactNode {
         return (
-            <div id="category">
+            <div>
+                <Heading text="Board index" />
                 {conditionalSpinnerRenderer(this.state.categories.length === 0)}
                 {this.state.categories.map((category: Category, key: number) => (
                     <CategoryView key={key} details={category} />

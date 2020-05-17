@@ -17,6 +17,12 @@ abstract class Service<T extends Deserializable> {
 
         return response.data.data.map((item: any) => objectCreator().deserialize(item));
     }
+
+    public async post(endpoint: string, payload: any): Promise<any> {
+        const response: AxiosResponse = await axios.post(this._url(endpoint), payload);
+
+        return response.data;
+    }
 }
 
 export default Service;
