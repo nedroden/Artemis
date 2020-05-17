@@ -12,3 +12,28 @@
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.infobox {
+    margin: 10px 0 10px 0;
+    padding: 15px;
+    color: #fff;
+    font-family: 'Roboto';
+    font-size: 95%;
+    border-radius: 5px;
+}
+
+.infobox-error {
+    background-color: #a83232;
+}
+
+.infobox-notice {
+    background-color: #a8a832;
+}
+
+.infobox-success {
+    background-color: #32a852;
+}
+
+.infobox-info {
+    background-color: #3283a8;
+}

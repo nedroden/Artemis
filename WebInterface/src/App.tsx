@@ -2,6 +2,7 @@ import React, { Component, ReactNode } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from './components/Auth/Login';
+import Logout from './components/Auth/Logout';
 import BoardIndex from './components/BoardIndex/BoardIndex';
 import environment from './environment';
 import Footer from './layout/Footer';
@@ -21,6 +22,9 @@ class App extends Component {
                                 <Switch>
                                     <Route path="/login">
                                         <Login />
+                                    </Route>
+                                    <Route path="/logout">
+                                        <Logout />
                                     </Route>
                                     <Route path="/">
                                         <BoardIndex />

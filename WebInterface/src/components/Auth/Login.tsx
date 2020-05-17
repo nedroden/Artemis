@@ -1,21 +1,23 @@
-import Cookies from 'js-cookie';
 import React, { Component, FormEvent, ReactNode } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Divider from '../../elements/Divider';
 import Button from '../../elements/Form/Button';
 import TextInput from '../../elements/Form/TextInput';
 import Heading from '../../elements/Heading';
+import Infobox from '../../elements/Infobox';
 import AuthService from '../../services/AuthService';
 
 interface State {
     email: string;
     password: string;
+    error?: string;
 }
 
-class Login extends Component<{}, State> {
+class Login extends Component<RouteComponentProps, State> {
     private _authService: AuthService;
 
-    public constructor(props: {}) {
+    public constructor(props: RouteComponentProps) {
         super(props);
 
         this._authService = new AuthService();
@@ -31,15 +33,22 @@ class Login extends Component<{}, State> {
 
     private async performLoginRequest(): Promise<void> {
         try {
-            const token: string | undefined = await this._authService.login(this.state.email, this.state.password);
+            const token: string | undefined = await this._authService.sendLoginRequest(
+                this.state.email,
+                this.state.password
+            );
 
             if (!token) {
-                throw new Error('Invalid login');
+                this.setState({ error: 'Invalid credentials.' });
+
+                return;
             }
 
-            Cookies.set('artemis', token, { expires: 7 });
+            this._authService.login(token);
+
+            this.props.history.push('/');
         } catch (exception) {
-            alert('Invalid login');
+            this.setState({ error: 'Unable to perform login request.' });
         }
     }
 
@@ -52,6 +61,8 @@ class Login extends Component<{}, State> {
     public render(): ReactNode {
         return (
             <div id="auth-wrapper">
+                {this.state.error ? <Infobox type="error" message={this.state.error} /> : null}
+
                 <Heading text="Login" />
                 <div id="auth-body">
                     <p className="description">Please enter your email address and password.</p>
@@ -83,4 +94,4 @@ class Login extends Component<{}, State> {
     }
 }
 
-export default Login;
+export default withRouter(Login);
