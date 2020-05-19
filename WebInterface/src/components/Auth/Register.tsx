@@ -14,7 +14,7 @@ interface State {
     password: string;
     passwordConfirmation: string;
     hasAcceptedTermsOfUse: boolean;
-    error?: string;
+    errors: string[];
 }
 
 class Register extends Component<RouteComponentProps, State> {
@@ -30,7 +30,8 @@ class Register extends Component<RouteComponentProps, State> {
             email: '',
             password: '',
             passwordConfirmation: '',
-            hasAcceptedTermsOfUse: false
+            hasAcceptedTermsOfUse: false,
+            errors: []
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,24 +40,35 @@ class Register extends Component<RouteComponentProps, State> {
 
     private async performRegistrationRequest(): Promise<void> {
         try {
-            const token: string | undefined = await this._authService.sendRegistrationRequest({
+            const response: any = await this._authService.sendRegistrationRequest({
                 username: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
                 passwordConfirmation: this.state.passwordConfirmation
             });
 
-            if (!token) {
-                this.setState({ error: 'Did not receive token after registration.' });
+            if (response.errors) {
+                const errors: string[] = [];
+
+                Object.values(response.errors).forEach((fieldErrors: any) =>
+                    fieldErrors.forEach((fieldError: string) => errors.push(fieldError))
+                );
+                this.setState({ errors });
 
                 return;
             }
 
-            this._authService.login(token);
+            if (!response.access_token) {
+                this.setState({ errors: ['Did not receive token after registration.'] });
+
+                return;
+            }
+
+            this._authService.login(response.access_token);
 
             this.props.history.push('/');
         } catch (exception) {
-            this.setState({ error: 'Unable to complete registration.' });
+            this.setState({ errors: ['Unable to complete registration.'] });
         }
     }
 
@@ -114,7 +126,7 @@ class Register extends Component<RouteComponentProps, State> {
 
         return (
             <div id="auth-wrapper-wide">
-                {this.state.error ? <Infobox type="error" message={this.state.error} /> : null}
+                {this.state.errors.length > 0 ? <Infobox type="error" message={this.state.errors} /> : null}
 
                 <Heading icon="user" text="Register a new account" />
                 <div id="auth-body">

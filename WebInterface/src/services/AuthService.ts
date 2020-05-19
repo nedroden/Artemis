@@ -33,14 +33,21 @@ class AuthService extends Service<GenericDeserializable> {
         return result?.access_token;
     }
 
-    public async sendRegistrationRequest(request: RegistrationRequest): Promise<string | undefined> {
-        const result: any = await super.post('/register', {
-            email: request.email,
-            name: request.username,
-            password: request.password
-        });
+    public async sendRegistrationRequest(request: RegistrationRequest): Promise<any> {
+        const validateStatus: (status: number) => boolean = (status: number) => [200, 400].includes(status);
 
-        return result?.access_token;
+        const result: any = await super.post(
+            '/register',
+            {
+                email: request.email,
+                name: request.username,
+                password: request.password,
+                password_confirmation: request.passwordConfirmation // eslint-disable-line
+            },
+            { validateStatus }
+        );
+
+        return result;
     }
 
     public isAuthenticated(): boolean {
