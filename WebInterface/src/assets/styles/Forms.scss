@@ -1,4 +1,4 @@
-.inputContainer {
+.input-container {
     padding: 10px;
 
     label {
@@ -9,11 +9,14 @@
     }
 
     .textInput {
-        padding: 10px;
-        font-size: 150%;
-        color: #666;
+        padding: 5px;
+        font-size: 120%;
+        color: #333;
         margin: 0;
-        width: auto;
+        width: 100%;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-family: 'Roboto';
     }
 }
 
@@ -23,4 +26,9 @@
     margin: 10px;
     background: steelblue;
     color: #f6f7f8;
+    border-radius: 3px;
+}
+
+.button-submit:disabled {
+    background: #aaa;
 }

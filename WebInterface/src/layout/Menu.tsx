@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { Subscription } from 'rxjs';
 
 import AuthService from '../services/AuthService';
@@ -42,7 +43,7 @@ class Menu extends Component<{}, State> {
             .filter((item: MenuItem) => (item.visible ? item.visible() : true))
             .map((item: MenuItem, index: number) => (
                 <li key={index}>
-                    <a href={item.href}>{item.label}</a>
+                    <Link to={item.href}>{item.label}</Link>
                 </li>
             ));
     }

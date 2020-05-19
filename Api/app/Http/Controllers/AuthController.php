@@ -14,10 +14,8 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'first_name' => $request->firstName,
-            'last_name' => $request->lastName,
             'is_banned' => false,
-            'primary_group_id' => 1
+            'primary_group_id' => 3
         ]);
 
         return $this->returnToken(auth()->login($user));

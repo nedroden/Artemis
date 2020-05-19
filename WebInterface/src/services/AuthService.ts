@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import GenericDeserializable from '../models/GenericDeserializable';
+import RegistrationRequest from '../models/types/RegistrationRequest';
 import Service from './Service';
 
 class AuthService extends Service<GenericDeserializable> {
@@ -28,6 +29,16 @@ class AuthService extends Service<GenericDeserializable> {
             },
             { validateStatus }
         );
+
+        return result?.access_token;
+    }
+
+    public async sendRegistrationRequest(request: RegistrationRequest): Promise<string | undefined> {
+        const result: any = await super.post('/register', {
+            email: request.email,
+            name: request.username,
+            password: request.password
+        });
 
         return result?.access_token;
     }

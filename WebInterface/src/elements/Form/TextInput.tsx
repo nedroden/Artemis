@@ -1,16 +1,15 @@
 import React, { ChangeEvent, Component, ReactElement } from 'react';
 
-interface Props {
+export interface TextInputProps {
     label: string;
     id: string;
     value: string;
-    name: string;
     type: 'text' | 'password' | 'email';
     onChange: (value: string) => void;
 }
 
-class TextInput extends Component<Props> {
-    public constructor(props: Props) {
+class TextInput extends Component<TextInputProps> {
+    public constructor(props: TextInputProps) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
@@ -22,11 +21,10 @@ class TextInput extends Component<Props> {
 
     public render(): ReactElement {
         return (
-            <div className="inputContainer">
+            <div className="input-container">
                 <label htmlFor={this.props.id}>{this.props.label}:</label>
                 <input
                     id={this.props.id}
-                    name={this.props.name}
                     type={this.props.type}
                     value={this.props.value}
                     onChange={this.handleChange}

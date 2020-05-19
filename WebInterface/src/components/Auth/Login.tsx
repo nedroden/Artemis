@@ -1,7 +1,6 @@
 import React, { Component, FormEvent, ReactNode } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Divider from '../../elements/Divider';
 import Button from '../../elements/Form/Button';
 import TextInput from '../../elements/Form/TextInput';
 import Heading from '../../elements/Heading';
@@ -63,15 +62,14 @@ class Login extends Component<RouteComponentProps, State> {
             <div id="auth-wrapper">
                 {this.state.error ? <Infobox type="error" message={this.state.error} /> : null}
 
-                <Heading text="Login" />
+                <Heading icon="lock" text="Login" />
                 <div id="auth-body">
                     <p className="description">Please enter your email address and password.</p>
-                    <Divider />
+
                     <form onSubmit={this.handleSubmit}>
                         <TextInput
                             label="Email"
                             id="email"
-                            name="email"
                             value={this.state.email}
                             type="email"
                             onChange={(value: string) => this.setState({ email: value })}
@@ -80,13 +78,12 @@ class Login extends Component<RouteComponentProps, State> {
                         <TextInput
                             label="Password"
                             id="password"
-                            name="password"
                             value={this.state.password}
                             type="password"
                             onChange={(value: string) => this.setState({ password: value })}
                         />
 
-                        <Button type="submit" label="Login" />
+                        <Button type="submit" label="Login" disabled={!this.state.email || !this.state.password} />
                     </form>
                 </div>
             </div>

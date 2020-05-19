@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('group_id')->default(3);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->boolean('is_banned')->default(false);
