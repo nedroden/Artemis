@@ -11,4 +11,4 @@ start:
 	php artisan serve
 
 test:
-	echo "Testing"
+	php artisan test

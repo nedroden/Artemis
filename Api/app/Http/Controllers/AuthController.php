@@ -29,7 +29,7 @@ class AuthController extends Controller
             'primary_group_id' => 3
         ]);
 
-        return $this->returnToken(auth()->login($user));
+        return $this->returnToken(auth()->login($user), 201);
     }
 
     public function login(Request $request): JsonResponse
@@ -38,19 +38,19 @@ class AuthController extends Controller
 
         if (!$token) {
             return response()->json([
-                'error' => 'Unauthorized'
+                'errors' => ['Unauthorized']
             ], 401);
         }
 
         return $this->returnToken($token);
     }
 
-    private function returnToken($token): JsonResponse
+    private function returnToken($token, int $statusCode = 200): JsonResponse
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        ], $statusCode);
     }
 }
