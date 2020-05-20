@@ -1,4 +1,4 @@
-import Category from '../models/Category';
+import Category from '../Models/Category';
 import Service from './Service';
 
 class CategoryService extends Service<Category> {

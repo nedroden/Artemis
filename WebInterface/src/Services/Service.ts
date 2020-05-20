@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import environment from '../environment';
-import Deserializable from '../models/Deserializable';
+import Deserializable from '../Models/Deserializable';
 
 abstract class Service<T extends Deserializable> {
     private _url: (endpoint: string) => string = (endpoint: string) => `${environment.apiUrl}${endpoint}`;

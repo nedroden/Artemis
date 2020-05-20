@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react';
 
-import Heading from '../../elements/Heading';
-import conditionalSpinnerRenderer from '../../helpers/ConditionalSpinnerRenderer';
-import Category from '../../models/Category';
-import CategoryService from '../../services/CategoryService';
+import conditionalSpinnerRenderer from '../../Helpers/ConditionalSpinnerRenderer';
+import Category from '../../Models/Category';
+import CategoryService from '../../Services/CategoryService';
+import Heading from '../Elements/Heading';
 import CategoryView from './Category';
 
 interface State {

@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
-import Model from '../../models/Board';
+import Model from '../../Models/Board';
 
 interface Props {
     details: Model;

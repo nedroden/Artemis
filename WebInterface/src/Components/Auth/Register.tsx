@@ -1,12 +1,12 @@
 import React, { Component, FormEvent, ReactNode } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Divider from '../../elements/Divider';
-import Button from '../../elements/Form/Button';
-import TextInput, { TextInputProps } from '../../elements/Form/TextInput';
-import Heading from '../../elements/Heading';
-import Infobox from '../../elements/Infobox';
-import AuthService from '../../services/AuthService';
+import AuthService from '../../Services/AuthService';
+import Divider from '../Elements/Divider';
+import Button from '../Elements/Form/Button';
+import TextInput, { TextInputProps } from '../Elements/Form/TextInput';
+import Heading from '../Elements/Heading';
+import Infobox from '../Elements/Infobox';
 
 interface State {
     username: string;

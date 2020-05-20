@@ -1,4 +1,4 @@
-import Board from '../models/Board';
+import Board from '../Models/Board';
 import Service from './Service';
 
 class BoardService extends Service<Board> {

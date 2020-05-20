@@ -1,17 +1,24 @@
 import React, { Component, ReactNode } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Infobox from '../../elements/Infobox';
-import AuthService from '../../services/AuthService';
+import User from '../../Models/User';
+import AuthService from '../../Services/AuthService';
+import Infobox from '../Elements/Infobox';
+
+export interface LogoutProps {
+    setCurrentUser: (user: User) => void;
+}
 
 interface State {
     success: boolean;
 }
 
-class Logout extends Component<RouteComponentProps, State> {
+type Props = LogoutProps & RouteComponentProps;
+
+class Logout extends Component<Props, State> {
     private _authService: AuthService;
 
-    public constructor(props: RouteComponentProps) {
+    public constructor(props: Props) {
         super(props);
 
         this._authService = new AuthService();
@@ -26,6 +33,15 @@ class Logout extends Component<RouteComponentProps, State> {
     }
 
     private logout(): void {
+        this.props.setCurrentUser(
+            new User().deserialize({
+                username: 'Guest',
+                email: 'unknown',
+                groupId: 4,
+                isGuest: true
+            })
+        );
+
         this.setState({ success: this._authService.logout() }, () => this.props.history.push('/'));
     }
 

@@ -1,14 +1,14 @@
 import React, { Component, ReactNode } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Login from './components/Auth/Login';
-import Logout from './components/Auth/Logout';
-import Register from './components/Auth/Register';
-import BoardIndex from './components/BoardIndex/BoardIndex';
+import Register from './Components/Auth/Register';
+import BoardIndex from './Components/BoardIndex/BoardIndex';
+import Footer from './Components/Layout/Footer';
+import Header from './Components/Layout/Header';
+import Login from './Containers/Auth/Login';
+import Logout from './Containers/Auth/Logout';
+import Menu from './Containers/Layout/Menu';
 import environment from './environment';
-import Footer from './layout/Footer';
-import Header from './layout/Header';
-import Menu from './layout/Menu';
 
 class App extends Component {
     public render(): ReactNode {

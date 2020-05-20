@@ -1,11 +1,16 @@
 import React, { Component, FormEvent, ReactNode } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import Button from '../../elements/Form/Button';
-import TextInput from '../../elements/Form/TextInput';
-import Heading from '../../elements/Heading';
-import Infobox from '../../elements/Infobox';
-import AuthService from '../../services/AuthService';
+import User from '../../Models/User';
+import AuthService from '../../Services/AuthService';
+import Button from '../Elements/Form/Button';
+import TextInput from '../Elements/Form/TextInput';
+import Heading from '../Elements/Heading';
+import Infobox from '../Elements/Infobox';
+
+export interface LoginProps {
+    setCurrentUser: (user: User) => void;
+}
 
 interface State {
     email: string;
@@ -13,10 +18,12 @@ interface State {
     error?: string;
 }
 
-class Login extends Component<RouteComponentProps, State> {
+type Props = LoginProps & RouteComponentProps;
+
+class Login extends Component<Props, State> {
     private _authService: AuthService;
 
-    public constructor(props: RouteComponentProps) {
+    public constructor(props: Props) {
         super(props);
 
         this._authService = new AuthService();
@@ -32,18 +39,24 @@ class Login extends Component<RouteComponentProps, State> {
 
     private async performLoginRequest(): Promise<void> {
         try {
-            const token: string | undefined = await this._authService.sendLoginRequest(
-                this.state.email,
-                this.state.password
-            );
+            const response: any = await this._authService.sendLoginRequest(this.state.email, this.state.password);
 
-            if (!token) {
-                this.setState({ error: 'Invalid credentials.' });
+            if (!response.access_token) {
+                this.setState({ error: response.errors[0] });
 
                 return;
             }
 
-            this._authService.login(token);
+            this._authService.login(response.access_token);
+
+            this.props.setCurrentUser(
+                new User().deserialize({
+                    username: 'Authenticated user',
+                    email: 'Unknown',
+                    groupId: 3,
+                    isGuest: false
+                })
+            );
 
             this.props.history.push('/');
         } catch (exception) {

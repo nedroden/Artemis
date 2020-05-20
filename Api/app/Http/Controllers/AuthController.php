@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         if (!$token) {
             return response()->json([
-                'errors' => ['Unauthorized']
+                'errors' => ['No user exists with the specified email address and password.']
             ], 401);
         }
 

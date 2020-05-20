@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import GenericDeserializable from '../models/GenericDeserializable';
-import RegistrationRequest from '../models/types/RegistrationRequest';
+import GenericDeserializable from '../Models/GenericDeserializable';
+import RegistrationRequest from '../Models/Types/RegistrationRequest';
 import Service from './Service';
 
 class AuthService extends Service<GenericDeserializable> {
@@ -18,7 +18,7 @@ class AuthService extends Service<GenericDeserializable> {
         }
     }
 
-    public async sendLoginRequest(email: string, password: string): Promise<string | undefined> {
+    public async sendLoginRequest(email: string, password: string): Promise<any> {
         const validateStatus: (status: number) => boolean = (status: number) => [200, 401].includes(status);
 
         const result: any = await super.post(
@@ -30,11 +30,11 @@ class AuthService extends Service<GenericDeserializable> {
             { validateStatus }
         );
 
-        return result?.access_token;
+        return result;
     }
 
     public async sendRegistrationRequest(request: RegistrationRequest): Promise<any> {
-        const validateStatus: (status: number) => boolean = (status: number) => [200, 400].includes(status);
+        const validateStatus: (status: number) => boolean = (status: number) => [201, 400].includes(status);
 
         const result: any = await super.post(
             '/register',

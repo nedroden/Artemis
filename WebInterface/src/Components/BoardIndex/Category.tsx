@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react';
 
-import conditionalSpinnerRenderer from '../../helpers/ConditionalSpinnerRenderer';
-import Board from '../../models/Board';
-import Model from '../../models/Category';
-import BoardService from '../../services/BoardService';
+import conditionalSpinnerRenderer from '../../Helpers/ConditionalSpinnerRenderer';
+import Board from '../../Models/Board';
+import Model from '../../Models/Category';
+import BoardService from '../../Services/BoardService';
 import BoardView from './Board';
 
 interface Props {
