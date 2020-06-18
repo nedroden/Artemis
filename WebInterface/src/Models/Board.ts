@@ -8,6 +8,8 @@ class Board implements Deserializable {
     public position?: number;
     public created_at?: string;
     public updated_at?: string;
+    public number_of_topics = 0;
+    public number_of_posts = 0;
 
     public deserialize(input: any): this {
         Object.assign(this, input);

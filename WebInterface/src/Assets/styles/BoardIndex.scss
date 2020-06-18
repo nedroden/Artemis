@@ -26,9 +26,14 @@
         .board {
             padding: 15px;
             border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             h3,
-            p {
+            p,
+            .last-message,
+            .num-topics-posts {
                 margin: 0;
                 font-family: Roboto;
             }
@@ -43,9 +48,37 @@
                 }
             }
 
-            p {
+            p,
+            .num-topics-posts,
+            .last-message {
                 font-size: 90%;
                 color: #666;
+            }
+
+            .general-board-info {
+                width: 65%;
+                float: left;
+            }
+
+            .num-topics-posts {
+                width: 10%;
+                float: left;
+
+                span {
+                    font-size: 115%;
+                    display: block;
+                }
+            }
+
+            .last-message {
+                width: 25%;
+                float: left;
+
+                a {
+                    color: steelblue;
+                    text-decoration: none;
+                    font-weight: normal;
+                }
             }
         }
     }
