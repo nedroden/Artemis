@@ -41,7 +41,7 @@ class Register extends Component<RouteComponentProps, State> {
     private async performRegistrationRequest(): Promise<void> {
         try {
             const response: any = await this._authService.sendRegistrationRequest({
-                username: this.state.username,
+                name: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
                 passwordConfirmation: this.state.passwordConfirmation
@@ -64,7 +64,7 @@ class Register extends Component<RouteComponentProps, State> {
                 return;
             }
 
-            this._authService.login(response.access_token);
+            await this._authService.login(response.access_token);
 
             this.props.history.push('/');
         } catch (exception) {

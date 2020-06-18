@@ -47,17 +47,7 @@ class Login extends Component<Props, State> {
                 return;
             }
 
-            this._authService.login(response.access_token);
-
-            this.props.setCurrentUser(
-                new User().deserialize({
-                    username: 'Authenticated user',
-                    email: 'Unknown',
-                    groupId: 3,
-                    isGuest: false
-                })
-            );
-
+            await this._authService.login(response.access_token);
             this.props.history.push('/');
         } catch (exception) {
             this.setState({ error: 'Unable to perform login request.' });

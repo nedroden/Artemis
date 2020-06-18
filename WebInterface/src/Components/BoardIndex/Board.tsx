@@ -11,7 +11,7 @@ class Board extends Component<Props> {
         return (
             <div className="board">
                 <h3>
-                    <a href="#">{this.props.details.title}</a>
+                    <a href="/board">{this.props.details.title}</a>
                 </h3>
                 <p>{this.props.details.description}</p>
             </div>

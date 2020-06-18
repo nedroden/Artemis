@@ -9,7 +9,10 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import store from './Core/Store';
+import Service from './Services/Service';
 import * as serviceWorker from './serviceWorker';
+
+Service.registerStore(store);
 
 ReactDOM.render(
     <StrictMode>

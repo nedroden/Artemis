@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Store } from 'redux';
 
 import environment from '../environment';
 import Deserializable from '../Models/Deserializable';
@@ -7,6 +8,12 @@ abstract class Service<T extends Deserializable> {
     private _url: (endpoint: string) => string = (endpoint: string) => `${environment.apiUrl}${endpoint}`;
 
     private static token: string;
+
+    protected static store: Store;
+
+    public static registerStore(store: Store): void {
+        this.store = store;
+    }
 
     private injectAuthorizationHeader(requestConfig?: AxiosRequestConfig): AxiosRequestConfig {
         const options: AxiosRequestConfig = requestConfig ?? {};
@@ -44,7 +51,7 @@ abstract class Service<T extends Deserializable> {
         return response.data;
     }
 
-    public setToken(token: string): void {
+    public setToken(token = ''): void {
         Service.token = token;
     }
 }

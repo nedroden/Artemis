@@ -7,7 +7,7 @@ export interface AuthState {
 
 const InitialState: AuthState = {
     user: new User().deserialize({
-        username: 'Guest',
+        name: 'Guest',
         email: 'none',
         groupId: 4
     })
@@ -18,7 +18,7 @@ const AuthReducer = (state: AuthState = InitialState, action: any): AuthState =>
         case SET_CURRENT_USER:
             return {
                 ...state,
-                user: action.user
+                user: action.user || InitialState.user
             };
         default:
             return state;

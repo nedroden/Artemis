@@ -1,23 +1,12 @@
 import Cookies from 'js-cookie';
-import { BehaviorSubject, Subscription } from 'rxjs';
 
+import { setCurrentUser } from '../Actions/Auth';
 import GenericDeserializable from '../Models/GenericDeserializable';
 import RegistrationRequest from '../Models/Types/RegistrationRequest';
+import User from '../Models/User';
 import Service from './Service';
 
 class AuthService extends Service<GenericDeserializable> {
-    private static loginStatus?: BehaviorSubject<boolean>;
-    private static isLoggedIn?: boolean;
-
-    public constructor() {
-        super();
-
-        if (!AuthService.loginStatus) {
-            AuthService.isLoggedIn = this.isAuthenticated();
-            AuthService.loginStatus = new BehaviorSubject<boolean>(AuthService.isLoggedIn);
-        }
-    }
-
     public async sendLoginRequest(email: string, password: string): Promise<any> {
         const validateStatus: (status: number) => boolean = (status: number) => [200, 401].includes(status);
 
@@ -40,7 +29,7 @@ class AuthService extends Service<GenericDeserializable> {
             '/register',
             {
                 email: request.email,
-                name: request.username,
+                name: request.name,
                 password: request.password,
                 password_confirmation: request.passwordConfirmation // eslint-disable-line
             },
@@ -50,43 +39,41 @@ class AuthService extends Service<GenericDeserializable> {
         return result;
     }
 
-    public isAuthenticated(): boolean {
-        return Boolean(Cookies.get('artemis'));
+    public async getUserInfo(id?: number): Promise<User> {
+        if (id) {
+            throw new Error('This action is not yet supported.');
+        }
+
+        return (await super.getSingle('/users/0', new User())) as User;
     }
 
-    public getToken(): string | undefined {
-        return Cookies.get('artemis');
+    public loadToken(): void {
+        this.setToken(Cookies.get('artemis'));
     }
 
-    public login(token: string): void {
+    public async refresh(): Promise<void> {
+        try {
+            const userInfo: User = await this.getUserInfo();
+            AuthService.store.dispatch(setCurrentUser(userInfo));
+        } catch (error) {
+            AuthService.store.dispatch(setCurrentUser());
+        }
+    }
+
+    public async login(token: string): Promise<void> {
         Cookies.set('artemis', token, { sameSite: 'strict' });
-
-        AuthService.isLoggedIn = true;
-
-        if (AuthService.loginStatus) {
-            AuthService.loginStatus.next(true);
-        }
-    }
-
-    public subscribeToLoginStatus(callback: (value: boolean) => void): Subscription {
-        if (!AuthService.loginStatus) {
-            throw new Error('Cannot subscribe to inactive loginStatus service.');
-        }
-
-        return AuthService.loginStatus.subscribe(callback);
+        this.setToken(token);
+        await this.refresh();
     }
 
     public logout(): boolean {
-        if (!this.isAuthenticated()) {
+        if (AuthService.store.getState().auth.user.isGuest()) {
             return false;
         }
 
         Cookies.remove('artemis');
-        AuthService.isLoggedIn = false;
-
-        if (AuthService.loginStatus) {
-            AuthService.loginStatus.next(false);
-        }
+        this.setToken();
+        this.refresh();
 
         return true;
     }

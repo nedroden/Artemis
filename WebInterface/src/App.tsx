@@ -1,16 +1,23 @@
 import React, { Component, ReactNode } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Logout from './Components/Auth/Logout';
 import Register from './Components/Auth/Register';
 import BoardIndex from './Components/BoardIndex/BoardIndex';
 import Footer from './Components/Layout/Footer';
-import Header from './Components/Layout/Header';
 import Login from './Containers/Auth/Login';
-import Logout from './Containers/Auth/Logout';
+import Header from './Containers/Layout/Header';
 import Menu from './Containers/Layout/Menu';
 import environment from './environment';
+import AuthService from './Services/AuthService';
 
 class App extends Component {
+    public componentDidMount(): void {
+        const authService: AuthService = new AuthService();
+        authService.loadToken();
+        authService.refresh();
+    }
+
     public render(): ReactNode {
         return (
             <div>

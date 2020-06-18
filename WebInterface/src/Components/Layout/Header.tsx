@@ -1,39 +1,24 @@
-import React, { Component, ReactElement } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Subscription } from 'rxjs';
 
-import AuthService from '../../Services/AuthService';
+import User from '../../Models/User';
 
-interface Props {
+interface HeaderProps {
     forumTitle: string;
 }
 
-interface State {
-    isLoggedIn: boolean;
-    isLoggedInSubscription: Subscription;
+export interface HeaderContainerProps {
+    user: User;
 }
 
-class Header extends Component<Props, State> {
-    private _authService: AuthService;
+type Props = HeaderProps & HeaderContainerProps;
 
-    public constructor(props: Props) {
-        super(props);
-
-        this._authService = new AuthService();
-
-        this.state = {
-            isLoggedIn: this._authService.isAuthenticated(),
-            isLoggedInSubscription: this._authService.subscribeToLoginStatus((value: boolean) => {
-                this.setState({ isLoggedIn: value });
-            })
-        };
-    }
-
-    private renderUserInfoBox(): ReactElement {
-        if (this.state.isLoggedIn) {
+export default class Header extends Component<Props> {
+    private renderUserInfoBox(): ReactNode {
+        if (this.props.user.isLoggedIn()) {
             return (
                 <div id="user-info">
-                    Hello, <strong>Administrator</strong> | <Link to="/logout">Logout</Link>
+                    Hello, <strong>{this.props.user?.name || 'Unknown'}</strong> | <Link to="/logout">Logout</Link>
                 </div>
             );
         }
@@ -45,7 +30,7 @@ class Header extends Component<Props, State> {
         );
     }
 
-    public render(): ReactElement {
+    public render(): ReactNode {
         return (
             <div id="header">
                 <Link to="/">{this.props.forumTitle}</Link>
@@ -57,5 +42,3 @@ class Header extends Component<Props, State> {
         );
     }
 }
-
-export default Header;

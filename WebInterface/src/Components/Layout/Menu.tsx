@@ -16,9 +16,9 @@ export interface MenuProps {
 class Menu extends Component<MenuProps> {
     private _menuItems: MenuItem[] = [
         { label: 'Home', href: '/' },
-        { label: 'Login', href: '/login', visible: () => !this.props.user.isGuest },
-        { label: 'Register', href: '/register', visible: () => !this.props.user.isGuest },
-        { label: 'Logout', href: '/logout', visible: () => Boolean(this.props.user.isGuest) }
+        { label: 'Login', href: '/login', visible: () => this.props.user.isGuest() },
+        { label: 'Register', href: '/register', visible: () => this.props.user.isGuest() },
+        { label: 'Logout', href: '/logout', visible: () => this.props.user.isLoggedIn() }
     ];
 
     private renderMenuItems(): ReactNode[] {
