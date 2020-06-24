@@ -20,6 +20,7 @@ class TopicResource extends JsonResource
             'title' => $this->title,
             'is_locked' => $this->is_locked,
             'is_sticky' => $this->is_sticky,
+            'last_message' => $this->getLastMessage(),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at
         ];

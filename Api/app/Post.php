@@ -12,4 +12,9 @@ class Post extends Model
     {
         return $this->belongsTo('user');
     }
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
 }

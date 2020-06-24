@@ -19,12 +19,12 @@ class BoardResource extends JsonResource
             'category_id' => $this->category_id,
             'title' => $this->title,
             'description' => $this->description,
-            'last_message_id' => $this->last_message_id,
+            'last_message' => $this->getLastMessage(),
             'position' => $this->position,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
-            'number_of_topics' => 0,
-            'number_of_posts' => 0
+            'number_of_topics' => $this->getNumberOfTopics(),
+            'number_of_posts' => $this->getNumberOfPosts()
         ];
     }
 }

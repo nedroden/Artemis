@@ -8,6 +8,9 @@ interface Props {
 
 class Board extends Component<Props> {
     public render(): ReactNode {
+        const posts: number = this.props.details.number_of_posts;
+        const topics: number = this.props.details.number_of_topics;
+
         return (
             <div className="board">
                 <div className="general-board-info">
@@ -18,8 +21,10 @@ class Board extends Component<Props> {
                 </div>
 
                 <div className="num-topics-posts">
-                    <span>{this.props.details.number_of_topics} topics</span>
-                    {this.props.details.number_of_posts} posts
+                    <span>
+                        {this.props.details.number_of_topics} {topics === 1 ? 'topic' : 'topics'}
+                    </span>
+                    {this.props.details.number_of_posts} {posts === 1 ? 'post' : 'posts'}
                 </div>
 
                 <div className="last-message">

@@ -12,4 +12,14 @@ class Topic extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function getLastMessage()
+    {
+        return $this->posts()->last();
+    }
+
+    public function getNumberOfPosts(): int
+    {
+        return $this->posts()->count();
+    }
 }
