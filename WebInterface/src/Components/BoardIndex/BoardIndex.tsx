@@ -10,10 +10,12 @@ interface State {
     categories: Category[];
 }
 
-class BoardIndex extends Component<{}, State> {
+type Props = {};
+
+class BoardIndex extends Component<Props, State> {
     private _categoryService: CategoryService;
 
-    public constructor(props: {}) {
+    public constructor(props: Props) {
         super(props);
 
         this._categoryService = new CategoryService();

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Resources\PostResource;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
@@ -15,7 +16,7 @@ class Topic extends Model
 
     public function getLastMessage()
     {
-        return $this->posts()->last();
+        return new PostResource($this->posts()->latest()->first());
     }
 
     public function getNumberOfPosts(): int

@@ -21,7 +21,7 @@ class Board extends Model
 
     public function getLastMessage()
     {
-        return new PostResource(Post::find($this->last_message_id ?? 0));
+        return !empty($this->last_message_id) ? new PostResource(Post::find($this->last_message_id)) : null;
     }
 
     public function getNumberOfPosts(): int

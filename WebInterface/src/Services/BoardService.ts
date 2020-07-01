@@ -10,6 +10,10 @@ class BoardService extends Service<Board> {
     public async getAllByCategory(categoryId: number): Promise<Board[]> {
         return await super.getAll(`/categories/${categoryId}/boards`, () => new Board());
     }
+
+    public async getById(id: number): Promise<Board> {
+        return await super.getSingle(`/boards/${id}`, new Board());
+    }
 }
 
 export default BoardService;

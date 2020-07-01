@@ -1,6 +1,7 @@
 import Deserializable from './Deserializable';
 
 class User implements Deserializable {
+    public id?: number;
     public name?: string;
     public email?: string;
     public group_id?: number;

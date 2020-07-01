@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Board;
 use App\Category;
 use App\Http\Resources\BoardResource;
+use App\Http\Resources\TopicResource;
 use App\Post;
+use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BoardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkPermission:manage_boards', ['except' => ['index', 'show']]);
+        $this->middleware('checkPermission:manage_boards', ['except' => ['index', 'show', 'topics']]);
     }
 
     public function index()
@@ -50,5 +53,10 @@ class BoardController extends Controller
         $board->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function topics(Board $board): AnonymousResourceCollection
+    {
+        return TopicResource::collection(Topic::where('board_id', $board->id)->get());
     }
 }

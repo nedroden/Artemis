@@ -18,6 +18,7 @@ class TopicResource extends JsonResource
             'id' => $this->id,
             'board_id' => $this->board_id,
             'title' => $this->title,
+            'number_of_replies' => $this->getNumberOfPosts() - 1,
             'is_locked' => $this->is_locked,
             'is_sticky' => $this->is_sticky,
             'last_message' => $this->getLastMessage(),

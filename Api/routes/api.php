@@ -25,6 +25,8 @@ Route::apiResource('categories', 'CategoryController');
 Route::get('categories/{category}/boards', 'CategoryController@boards');
 
 Route::apiResource('boards', 'BoardController');
+Route::get('boards/{board}/topics', 'BoardController@topics');
+
 Route::apiResource('groups', 'GroupController');
 Route::apiResource('logentries', 'LogEntryController');
 Route::apiResource('logentrytypes', 'LogEntryTypeController');
