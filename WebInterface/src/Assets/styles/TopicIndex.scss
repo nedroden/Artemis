@@ -1,5 +1,24 @@
 #topic-list {
-    padding: 15px;
+    .board-info {
+        margin-top: 15px;
+        padding: 15px;
+        background: #efefef;
+
+        h2,
+        p {
+            font-family: Roboto;
+            margin: 0;
+            color: #444;
+        }
+
+        h2 {
+            font-size: 130%;
+        }
+
+        p {
+            font-size: 80%;
+        }
+    }
 
     .topic-list-item {
         padding: 15px;

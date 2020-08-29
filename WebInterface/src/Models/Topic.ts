@@ -10,12 +10,17 @@ export default class Post implements Deserializable, Timed {
     public number_of_replies?: number;
     public is_locked?: boolean;
     public is_sticky?: boolean;
+    public first_message?: Post;
     public last_message?: Post;
     public created_at?: string;
     public updated_at?: string;
 
     public deserialize(input: any): this {
         Object.assign(this, input);
+
+        if ('first_message' in input) {
+            this.first_message = new Post().deserialize(input.first_message);
+        }
 
         if ('last_message' in input) {
             this.last_message = new Post().deserialize(input.last_message);

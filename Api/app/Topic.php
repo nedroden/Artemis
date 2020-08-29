@@ -14,6 +14,11 @@ class Topic extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function getFirstMessage()
+    {
+        return new PostResource($this->posts()->first());
+    }
+
     public function getLastMessage()
     {
         return new PostResource($this->posts()->latest()->first());

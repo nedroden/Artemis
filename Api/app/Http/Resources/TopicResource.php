@@ -21,6 +21,7 @@ class TopicResource extends JsonResource
             'number_of_replies' => $this->getNumberOfPosts() - 1,
             'is_locked' => $this->is_locked,
             'is_sticky' => $this->is_sticky,
+            'first_message' => $this->getFirstMessage(),
             'last_message' => $this->getLastMessage(),
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at
